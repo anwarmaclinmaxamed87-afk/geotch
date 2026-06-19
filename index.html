@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Home | ECO-CORE DEVELOPERS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0A1628;
+  --navy-2:#0f1f38;
+  --navy-3:#162540;
+  --teal:#0F4C5C;
+  --teal-light:#1a6b82;
+  --green:#2E8B57;
+  --amber:#F4A261;
+  --amber-dark:#e8894a;
+  --white:#FFFFFF;
+  --off-white:#F8FAFB;
+  --light-gray:#f1f3f5;
+  --dark:#0A1628;
+  --gray:#8892a4;
+  --gray-light:#e2e6ea;
+  --border:rgba(255,255,255,0.08);
+  --border-light:rgba(255,255,255,0.12);
+  --font-display:'Poppins',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --tr:0.3s cubic-bezier(0.4,0,0.2,1);
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:0 8px 32px rgba(0,0,0,0.16);
+  --shadow-lg:0 24px 64px rgba(0,0,0,0.22);
+  --shadow-xl:0 40px 80px rgba(0,0,0,0.28);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--font-body);color:var(--white);background:var(--navy);overflow-x:hidden;line-height:1.6}
+img{max-width:100%;display:block;background:linear-gradient(135deg,#0f2a3f,#1a4a35)}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15}
+
+/* TYPOGRAPHY */
+.eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);font-family:var(--font-display);display:flex;align-items:center;gap:0.6rem}
+.eyebrow::before{content:'';width:24px;height:1.5px;background:var(--amber)}
+.section-title{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;color:var(--white);margin:0.6rem 0 1.2rem;letter-spacing:-0.02em}
+.section-title em{font-style:normal;color:var(--amber)}
+.section-title .t{color:var(--amber)}
+.section-sub{font-size:0.95rem;color:var(--gray);max-width:560px;line-height:1.8}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--navy)}
+::-webkit-scrollbar-thumb{background:var(--amber);border-radius:2px}
+
+/* NAV */
+#navbar{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:var(--tr);padding:1.4rem 0}
+#navbar.scrolled{background:rgba(10,22,40,0.96);backdrop-filter:blur(20px);padding:0.8rem 0;border-bottom:1px solid var(--border)}
+#navbar.solid{background:rgba(10,22,40,0.98);padding:0.8rem 0;border-bottom:1px solid var(--border)}
+.nav-container{max-width:1400px;margin:0 auto;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-logo{display:flex;align-items:center;gap:0.85rem;cursor:pointer}
+.logo-mark{width:40px;height:40px;background:var(--amber);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:900;font-size:0.95rem;color:var(--navy);flex-shrink:0;letter-spacing:-0.04em}
+.logo-text{font-family:var(--font-display);font-weight:800;font-size:0.95rem;color:var(--white);line-height:1.1;letter-spacing:0.01em}
+.logo-text span{display:block;font-weight:400;font-size:0.58rem;letter-spacing:0.18em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:0}
+.nav-links a{font-family:var(--font-display);font-size:0.78rem;font-weight:500;color:rgba(255,255,255,0.6);padding:0.5rem 0.9rem;transition:var(--tr);letter-spacing:0.04em;text-transform:uppercase;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:50%;right:50%;height:1px;background:var(--amber);transition:var(--tr)}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.nav-links a:hover::after,.nav-links a.active::after{left:0.9rem;right:0.9rem}
+.nav-cta{background:var(--amber)!important;color:var(--navy)!important;padding:0.55rem 1.3rem!important;border-radius:4px!important;font-weight:700!important;letter-spacing:0.04em!important}
+.nav-cta:hover{background:var(--amber-dark)!important;transform:translateY(-1px);box-shadow:0 4px 20px rgba(244,162,97,0.35)!important}
+.nav-cta::after{display:none!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:1.5px;background:var(--white);border-radius:2px;transition:var(--tr)}
+.mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--navy);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:1.75rem;border-top:1px solid var(--border)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--font-display);font-size:1.3rem;font-weight:700;color:rgba(255,255,255,0.75);letter-spacing:0.06em;text-transform:uppercase;transition:var(--tr)}
+.mobile-menu a:hover{color:var(--amber)}
+.mobile-close{position:absolute;top:1.5rem;right:2rem;font-size:1.4rem;color:rgba(255,255,255,0.5);cursor:pointer;background:none;border:none;transition:var(--tr)}
+.mobile-close:hover{color:var(--amber)}
+
+/* PAGE HERO BANNER */
+.page-hero{background:var(--navy-2);padding:9rem 2.5rem 5rem;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.page-hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:radial-gradient(ellipse at 80% 50%,rgba(244,162,97,0.06) 0%,transparent 70%)}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(244,162,97,0.3),transparent)}
+.page-hero-inner{max-width:1400px;margin:0 auto}
+.page-hero-title{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,4rem);font-weight:900;color:var(--white);margin-bottom:0.75rem;letter-spacing:-0.03em;line-height:1.05}
+.page-hero-title em{font-style:normal;color:var(--amber)}
+.page-hero-sub{font-size:1rem;color:var(--gray);max-width:480px;line-height:1.75;margin-bottom:1.5rem}
+.breadcrumb{display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase}
+.breadcrumb a{color:rgba(255,255,255,0.4);transition:var(--tr)}
+.breadcrumb a:hover{color:var(--amber)}
+.breadcrumb .sep{color:rgba(255,255,255,0.15)}
+
+/* SECTIONS */
+section{padding:6rem 0}
+.container{max-width:1400px;margin:0 auto;padding:0 2.5rem}
+.section-header{margin-bottom:3.5rem}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+.section-header.center .eyebrow{justify-content:center}
+
+/* BUTTONS */
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--amber);color:var(--navy);font-family:var(--font-display);font-weight:700;font-size:0.82rem;padding:0.75rem 1.75rem;border-radius:4px;transition:var(--tr);border:none;cursor:pointer;letter-spacing:0.04em;text-transform:uppercase}
+.btn-primary:hover{background:var(--amber-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(244,162,97,0.35)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.5rem;background:transparent;color:var(--white);font-family:var(--font-display);font-weight:600;font-size:0.82rem;padding:0.75rem 1.75rem;border-radius:4px;border:1px solid var(--border-light);transition:var(--tr);letter-spacing:0.04em;text-transform:uppercase}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;color:var(--amber);font-family:var(--font-display);font-weight:600;font-size:0.8rem;transition:var(--tr);letter-spacing:0.04em;text-transform:uppercase}
+.btn-ghost:hover{gap:0.85rem}
+.btn-ghost i{transition:var(--tr)}
+
+/* DIVIDERS */
+.line-divider{width:100%;height:1px;background:var(--border)}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal.active{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal-left.active{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.75s ease,transform 0.75s ease}
+.reveal-right.active{opacity:1;transform:translateX(0)}
+
+/* FOOTER */
+footer{background:var(--navy-2);border-top:1px solid var(--border);padding:4rem 0 0}
+.footer-grid{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:3rem;border-bottom:1px solid var(--border)}
+.footer-brand p{font-size:0.82rem;color:var(--gray);line-height:1.8;margin:1rem 0 1.75rem;max-width:280px}
+.footer-social{display:flex;gap:0.5rem}
+.footer-social a{width:32px;height:32px;border-radius:4px;border:1px solid var(--border-light);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:0.75rem;transition:var(--tr)}
+.footer-social a:hover{border-color:var(--amber);color:var(--amber)}
+.footer-col-title{font-family:var(--font-display);font-weight:700;font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:1.2rem}
+.footer-col ul{display:flex;flex-direction:column;gap:0.65rem}
+.footer-col ul li a{font-size:0.82rem;color:var(--gray);transition:var(--tr)}
+.footer-col ul li a:hover{color:var(--white)}
+.footer-bottom{padding:1.5rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{font-size:0.75rem;color:rgba(255,255,255,0.25)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-size:0.75rem;color:rgba(255,255,255,0.25);transition:var(--tr)}
+.footer-bottom-links a:hover{color:rgba(255,255,255,0.5)}
+#backTop{position:fixed;bottom:2rem;right:2rem;width:40px;height:40px;border-radius:4px;background:var(--amber);color:var(--navy);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.8rem;transition:var(--tr);opacity:0;transform:translateY(10px);pointer-events:none;z-index:500}
+#backTop.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+#backTop:hover{background:var(--amber-dark)}
+
+@media(max-width:1100px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){section{padding:4rem 0}.nav-links{display:none}.hamburger{display:flex}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}}
+
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3)}
+.hero-bg-grad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,22,40,0.9) 0%,rgba(10,22,40,0.5) 60%,rgba(15,76,92,0.3) 100%)}
+.hero-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:10rem 2.5rem 6rem;width:100%}
+.hero-est{display:inline-flex;align-items:center;gap:0.75rem;margin-bottom:2rem}
+.hero-est-line{width:32px;height:1px;background:var(--amber)}
+.hero-est span{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-family:var(--font-display);font-weight:500}
+.hero-title{font-family:var(--font-display);font-size:clamp(2.8rem,6.5vw,5.5rem);font-weight:900;color:var(--white);line-height:1.0;letter-spacing:-0.03em;max-width:820px;margin-bottom:1.5rem}
+.hero-title em{font-style:normal;color:var(--amber)}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,0.55);max-width:480px;line-height:1.8;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:5rem}
+.hero-stats{display:flex;gap:0;border-top:1px solid var(--border)}
+.hs-item{padding:1.5rem 3rem 0 0;border-right:1px solid var(--border);margin-right:3rem}
+.hs-item:last-child{border-right:none;margin-right:0}
+.hs-num{font-family:var(--font-display);font-size:2rem;font-weight:900;color:var(--white);line-height:1;display:flex;align-items:baseline;gap:1px}
+.hs-num sup{font-size:0.95rem;color:var(--amber);font-weight:700}
+.hs-label{font-size:0.65rem;color:rgba(255,255,255,0.35);letter-spacing:0.15em;text-transform:uppercase;margin-top:0.3rem}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;z-index:2;cursor:pointer}
+.hero-scroll span{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);font-family:var(--font-display)}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(var(--amber),transparent);animation:scrollLine 2s infinite}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ABOUT STRIP */
+.about-strip{background:var(--navy-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.as-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.as-img{position:relative;overflow:hidden;min-height:520px}
+.as-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.7);transition:transform 0.8s ease}
+.as-img:hover img{transform:scale(1.04)}
+.as-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,var(--navy-2) 100%)}
+.as-content{padding:5rem 4rem 5rem 3rem;display:flex;flex-direction:column;justify-content:center}
+.as-metric{display:flex;gap:2.5rem;margin:2rem 0;padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.as-m-num{font-family:var(--font-display);font-weight:800;font-size:1.5rem;color:var(--amber);line-height:1}
+.as-m-label{font-size:0.7rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.2rem}
+
+/* SERVICES STRIP */
+.services-strip{background:var(--navy)}
+.ss-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);border-left:1px solid var(--border)}
+.ss-card{padding:2.5rem 2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:var(--tr);cursor:default;position:relative;overflow:hidden}
+.ss-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--amber);transition:var(--tr)}
+.ss-card:hover{background:rgba(255,255,255,0.03)}
+.ss-card:hover::before{height:100%}
+.ss-num{font-family:var(--font-display);font-size:0.65rem;font-weight:700;color:rgba(255,255,255,0.2);letter-spacing:0.15em;margin-bottom:1.25rem}
+.ss-icon{font-size:1.5rem;color:var(--amber);margin-bottom:1.25rem;transition:var(--tr)}
+.ss-card:hover .ss-icon{transform:scale(1.1)}
+.ss-title{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--white);margin-bottom:0.6rem;letter-spacing:-0.01em}
+.ss-desc{font-size:0.8rem;color:var(--gray);line-height:1.7;margin-bottom:1.25rem}
+.ss-arrow{font-size:0.75rem;color:rgba(255,255,255,0.2);transition:var(--tr);display:flex;align-items:center;gap:0.4rem;font-family:var(--font-display);font-weight:600;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase}
+.ss-card:hover .ss-arrow{color:var(--amber);gap:0.7rem}
+
+/* PROJECTS STRIP */
+.projects-strip{background:var(--navy-2);border-top:1px solid var(--border)}
+.ps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.ps-card{background:var(--navy-2);overflow:hidden;position:relative;cursor:pointer}
+.ps-img{aspect-ratio:4/3;overflow:hidden}
+.ps-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.8);transition:transform 0.6s ease,filter 0.6s ease}
+.ps-card:hover .ps-img img{transform:scale(1.06);filter:brightness(0.6)}
+.ps-info{padding:1.5rem}
+.ps-tag{font-size:0.62rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--amber);margin-bottom:0.4rem;font-family:var(--font-display)}
+.ps-name{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--white);margin-bottom:0.25rem;letter-spacing:-0.01em}
+.ps-loc{font-size:0.75rem;color:var(--gray)}
+
+/* CTA BAND */
+.cta-band{background:var(--navy-3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:5rem 0}
+.cta-band-inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.cta-band h2{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--white);letter-spacing:-0.02em;max-width:500px}
+.cta-band h2 em{font-style:normal;color:var(--amber)}
+
+/* WHY */
+.why-strip{background:var(--navy)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+.why-card{background:var(--navy);padding:2.5rem;transition:var(--tr)}
+.why-card:hover{background:var(--navy-2)}
+.why-icon{width:44px;height:44px;border:1px solid var(--border-light);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--amber);margin-bottom:1.25rem;transition:var(--tr)}
+.why-card:hover .why-icon{border-color:var(--amber);background:rgba(244,162,97,0.08)}
+.why-title{font-family:var(--font-display);font-weight:700;font-size:0.95rem;color:var(--white);margin-bottom:0.5rem;letter-spacing:-0.01em}
+.why-desc{font-size:0.8rem;color:var(--gray);line-height:1.7}
+
+@media(max-width:1000px){.ss-grid{grid-template-columns:1fr 1fr}.ps-grid{grid-template-columns:1fr 1fr}.why-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.as-grid{grid-template-columns:1fr}.as-img{display:none}.hero-stats{flex-direction:column;gap:0}.hs-item{border-right:none;padding-right:0;margin-right:0;padding-bottom:1rem;border-bottom:1px solid var(--border);margin-bottom:0}.cta-band-inner{flex-direction:column;text-align:center}}
+@media(max-width:600px){.ss-grid{grid-template-columns:1fr}.ps-grid{grid-template-columns:1fr}.why-grid{grid-template-columns:1fr}}
+
+/* ===== V3 PREMIUM ANIMATION LAYER (CSI-style) ===== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes lineGrow{from{width:0}to{width:100%}}
+@keyframes textReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
+@keyframes floatSlow{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(244,162,97,0.4)}50%{box-shadow:0 0 0 8px rgba(244,162,97,0)}}
+
+/* Parallax containers */
+.parallax-wrap{position:relative;overflow:hidden}
+.parallax-img{position:absolute;inset:-10% -5%;width:110%;height:120%;will-change:transform}
+.parallax-img img{width:100%;height:100%;object-fit:cover}
+
+/* Hero text reveal stagger */
+.reveal-stagger > *{opacity:0;transform:translateY(28px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+.reveal-stagger.active > *{opacity:1;transform:translateY(0)}
+.reveal-stagger.active > *:nth-child(1){transition-delay:0.05s}
+.reveal-stagger.active > *:nth-child(2){transition-delay:0.15s}
+.reveal-stagger.active > *:nth-child(3){transition-delay:0.25s}
+.reveal-stagger.active > *:nth-child(4){transition-delay:0.35s}
+.reveal-stagger.active > *:nth-child(5){transition-delay:0.45s}
+
+/* Animated underline links */
+.link-anim{position:relative;display:inline-block}
+.link-anim::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--amber);transition:width 0.4s cubic-bezier(0.16,1,0.3,1)}
+.link-anim:hover::after{width:100%}
+
+/* Magnetic button effect wrapper */
+.btn-primary,.btn-outline{position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);transition:left 0.6s ease}
+.btn-primary:hover::before{left:100%}
+
+/* Number count-up glow */
+.count{display:inline-block}
+.stat-glow{animation:pulseGlow 2.4s ease-out 1}
+
+/* Card lift with shadow grow */
+.svc-card,.ss-card,.why-card,.proj-card,.team-card,.cert-card,.val-card{will-change:transform}
+
+/* Smooth image zoom-reveal on scroll */
+.img-reveal{overflow:hidden;position:relative}
+.img-reveal img{transform:scale(1.15);transition:transform 1.2s cubic-bezier(0.16,1,0.3,1)}
+.img-reveal.active img{transform:scale(1)}
+.img-reveal::after{content:'';position:absolute;inset:0;background:var(--navy);transform:scaleX(1);transform-origin:right;transition:transform 1s cubic-bezier(0.83,0,0.17,1);z-index:2}
+.img-reveal.active::after{transform:scaleX(0)}
+
+/* Eyebrow line grow animation */
+.eyebrow::before{transition:width 0.8s cubic-bezier(0.16,1,0.3,1)}
+.reveal .eyebrow::before,.reveal-left .eyebrow::before,.reveal-right .eyebrow::before{width:0}
+.reveal.active .eyebrow::before,.reveal-left.active .eyebrow::before,.reveal-right.active .eyebrow::before{width:24px}
+
+/* Cursor glow dot (desktop only) */
+.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(244,162,97,0.06) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity 0.3s ease;opacity:0;display:none}
+@media(min-width:1024px){.cursor-glow{display:block}}
+
+/* Smooth section fade-through on scroll for hero */
+.hero-bg img{will-change:transform}
+
+/* Number ticker box subtle hover */
+.hs-item,.sb-item,.gb-item{transition:transform 0.4s cubic-bezier(0.16,1,0.3,1)}
+.hs-item:hover,.sb-item:hover,.gb-item:hover{transform:translateY(-4px)}
+
+/* Loading bar at top on page load */
+.page-load-bar{position:fixed;top:0;left:0;height:2px;background:var(--amber);z-index:9999;width:0%;transition:width 0.4s ease}
+
+/* Marquee for trusted-by / clients style strip (CSI uses logo strips) */
+.marquee-wrap{overflow:hidden;position:relative;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.75rem 0;background:var(--navy-2)}
+.marquee-track{display:flex;gap:4rem;white-space:nowrap;animation:marqueeScroll 28s linear infinite}
+.marquee-track span{font-family:var(--font-display);font-weight:700;font-size:0.85rem;color:rgba(255,255,255,0.25);letter-spacing:0.08em;text-transform:uppercase;flex-shrink:0}
+@keyframes marqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Scroll progress indicator bar */
+#scrollProgress{position:fixed;top:0;left:0;height:2px;background:var(--amber);z-index:1001;width:0%}
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()"><i class="fas fa-times"></i></button>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="sustainability.html">Sustainability</a>
+  <a href="contact.html" style="background:var(--amber);color:var(--navy);padding:0.7rem 2rem;border-radius:4px;font-weight:700;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase">Consultation</a>
+</div>
+<nav id="navbar" class="">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark">EC</div>
+      <div class="logo-text">ECO-CORE DEVELOPERS<span>Engineering Excellence · Mogadishu</span></div>
+    </a>
+    <div class="nav-links"><a href="index.html" class="active">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="projects.html">Projects</a><a href="team.html">Team</a><a href="sustainability.html">Sustainability</a><a href="contact.html" class="nav-cta ">Consultation</a></div>
+    <div class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg">
+    <img src="https://picsum.photos/seed/hero1/1920/1080" alt="Construction"/>
+    <div class="hero-bg-grad"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-est"><div class="hero-est-line"></div><span>Established 2009 — Mogadishu, Somalia</span></div>
+    <h1 class="hero-title">Building Somalia's Future Through <em>Engineering</em> Excellence</h1>
+    <p class="hero-desc">A regional group delivering integrated construction, real estate, and infrastructure solutions across Somalia and the Horn of Africa.</p>
+    <div class="hero-actions">
+      <a href="projects.html" class="btn-primary"><i class="fas fa-arrow-right"></i> Explore Projects</a>
+      <a href="contact.html" class="btn-outline">Get In Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs-item"><div class="hs-num"><span class="count" data-target="120">0</span><sup>+</sup></div><div class="hs-label">Projects</div></div>
+      <div class="hs-item"><div class="hs-num"><span class="count" data-target="85">0</span><sup>+</sup></div><div class="hs-label">Clients</div></div>
+      <div class="hs-item"><div class="hs-num"><span class="count" data-target="12">0</span></div><div class="hs-label">Cities</div></div>
+      <div class="hs-item"><div class="hs-num"><span class="count" data-target="150">0</span><sup>+</sup></div><div class="hs-label">Team</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll" onclick="document.getElementById('about-strip').scrollIntoView({behavior:'smooth'})">
+    <span>Scroll</span><div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>UNOPS</span><span>UNICEF</span><span>World Bank</span><span>USAID</span><span>AfDB</span><span>Ministry of Public Works</span><span>Premier Bank</span><span>UN-Habitat</span>
+    <span>UNOPS</span><span>UNICEF</span><span>World Bank</span><span>USAID</span><span>AfDB</span><span>Ministry of Public Works</span><span>Premier Bank</span><span>UN-Habitat</span>
+  </div>
+</div>
+<div class="about-strip" id="about-strip">
+  <div class="as-grid">
+    <div class="as-img reveal-left">
+      <img src="https://picsum.photos/seed/engineer1/900/600" alt="Engineering"/>
+      <div class="as-img-overlay"></div>
+    </div>
+    <div class="as-content reveal-right">
+      <div class="eyebrow">Who We Are</div>
+      <h2 class="section-title">Pioneering <em>Sustainable</em> Construction in Somalia</h2>
+      <p class="section-sub">Founded with a commitment to transforming Somalia's built environment, ECO-CORE combines cutting-edge engineering with deep local expertise to deliver structures that endure generations.</p>
+      <div class="as-metric">
+        <div><div class="as-m-num">$240M+</div><div class="as-m-label">Project Value</div></div>
+        <div><div class="as-m-num">ISO 9001</div><div class="as-m-label">Certified</div></div>
+        <div><div class="as-m-num">15+</div><div class="as-m-label">Years</div></div>
+      </div>
+      <a href="about.html" class="btn-ghost">Learn More About Us <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</div>
+
+<section class="services-strip">
+  <div class="container">
+    <div class="section-header" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:3rem">
+      <div><div class="eyebrow">What We Do</div><h2 class="section-title" style="margin-bottom:0">Core <em>Services</em></h2></div>
+      <a href="services.html" class="btn-ghost">All Services <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <div style="max-width:1400px;margin:0 auto;padding:0 2.5rem">
+    <div class="ss-grid">
+      <div class="ss-card reveal"><div class="ss-num">01</div><div class="ss-icon"><i class="fas fa-home"></i></div><div class="ss-title">Residential Construction</div><div class="ss-desc">Premium villas, apartments and gated communities built to international safety codes.</div><div class="ss-arrow">View Service <i class="fas fa-arrow-right"></i></div></div>
+      <div class="ss-card reveal" style="transition-delay:0.06s"><div class="ss-num">02</div><div class="ss-icon"><i class="fas fa-city"></i></div><div class="ss-title">Commercial Construction</div><div class="ss-desc">Office towers, retail complexes and mixed-use developments that define skylines.</div><div class="ss-arrow">View Service <i class="fas fa-arrow-right"></i></div></div>
+      <div class="ss-card reveal" style="transition-delay:0.12s"><div class="ss-num">03</div><div class="ss-icon"><i class="fas fa-road"></i></div><div class="ss-title">Infrastructure & Roads</div><div class="ss-desc">Road networks, drainage, utility corridors and civil works for Somalia's growth.</div><div class="ss-arrow">View Service <i class="fas fa-arrow-right"></i></div></div>
+      <div class="ss-card reveal"><div class="ss-num">04</div><div class="ss-icon"><i class="fas fa-drafting-compass"></i></div><div class="ss-title">Architectural Design</div><div class="ss-desc">Concept development and permit-ready drawings by our certified architect team.</div><div class="ss-arrow">View Service <i class="fas fa-arrow-right"></i></div></div>
+      <div class="ss-card reveal" style="transition-delay:0.06s"><div class="ss-num">05</div><div class="ss-icon"><i class="fas fa-tasks"></i></div><div class="ss-title">Project Management</div><div class="ss-desc">Rigorous scheduling, cost control and QA from groundbreaking to occupancy.</div><div class="ss-arrow">View Service <i class="fas fa-arrow-right"></i></div></div>
+      <div class="ss-card reveal" style="transition-delay:0.12s"><div class="ss-num">06</div><div class="ss-icon"><i class="fas fa-solar-panel"></i></div><div class="ss-title">Green & Solar Solutions</div><div class="ss-desc">Solar integration and energy-efficient systems incorporated at the build stage.</div><div class="ss-arrow">View Service <i class="fas fa-arrow-right"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-strip">
+  <div class="container">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:0">
+      <div><div class="eyebrow">Our Work</div><h2 class="section-title" style="margin-bottom:0">Featured <em>Projects</em></h2></div>
+      <a href="projects.html" class="btn-ghost">View All <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <div class="ps-grid">
+      <div class="ps-card reveal"><div class="ps-img"><img src="https://picsum.photos/seed/build1/700/525" alt="Project"/></div><div class="ps-info"><div class="ps-tag">Residential</div><div class="ps-name">Lafoole Heights Estate</div><div class="ps-loc">Mogadishu, Banadir</div></div></div>
+      <div class="ps-card reveal" style="transition-delay:0.08s"><div class="ps-img"><img src="https://picsum.photos/seed/build2/700/525" alt="Project"/></div><div class="ps-info"><div class="ps-tag">Commercial</div><div class="ps-name">Hamarweyne Business Tower</div><div class="ps-loc">Mogadishu, Banadir</div></div></div>
+      <div class="ps-card reveal" style="transition-delay:0.16s"><div class="ps-img"><img src="https://picsum.photos/seed/build3/700/525" alt="Project"/></div><div class="ps-info"><div class="ps-tag">Infrastructure</div><div class="ps-name">Afgooye Corridor Road</div><div class="ps-loc">Lower Shabelle Region</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="why-strip">
+  <div class="container">
+    <div class="section-header center">
+      <div class="eyebrow" style="justify-content:center">Why ECO-CORE</div>
+      <h2 class="section-title">The Standard That <em>Sets Us Apart</em></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="why-icon"><i class="fas fa-hard-hat"></i></div><div class="why-title">Engineering Expertise</div><div class="why-desc">15+ years of specialized knowledge in Somalia's geology, climate and regulatory environment.</div></div>
+      <div class="why-card reveal" style="transition-delay:0.06s"><div class="why-icon"><i class="fas fa-shield-alt"></i></div><div class="why-title">Quality Assurance</div><div class="why-desc">ISO 9001-certified QA processes with third-party inspections at every project phase.</div></div>
+      <div class="why-card reveal" style="transition-delay:0.12s"><div class="why-icon"><i class="fas fa-chart-line"></i></div><div class="why-title">Transparent Reporting</div><div class="why-desc">Real-time dashboards and weekly cost reports — full visibility for every client.</div></div>
+      <div class="why-card reveal"><div class="why-icon"><i class="fas fa-microchip"></i></div><div class="why-title">Modern Technology</div><div class="why-desc">BIM modeling, drone surveys and AI scheduling that reduce waste and accelerate timelines.</div></div>
+      <div class="why-card reveal" style="transition-delay:0.06s"><div class="why-icon"><i class="fas fa-seedling"></i></div><div class="why-title">Sustainability First</div><div class="why-desc">Green building principles embedded from brief — reducing costs and carbon footprint.</div></div>
+      <div class="why-card reveal" style="transition-delay:0.12s"><div class="why-icon"><i class="fas fa-users"></i></div><div class="why-title">Professional Team</div><div class="why-desc">150+ certified engineers, architects and project managers across 12 Somali cities.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="container">
+    <div class="cta-band-inner">
+      <h2>Ready to Start Your <em>Next Project?</em></h2>
+      <a href="contact.html" class="btn-primary" style="font-size:0.85rem;padding:0.9rem 2rem"><i class="fas fa-paper-plane"></i> Request Consultation</a>
+    </div>
+  </div>
+</div>
+
+<script>
+let cs=false;
+const ho=new IntersectionObserver(e=>{if(e[0].isIntersecting&&!cs){cs=true;document.querySelectorAll('.count').forEach(el=>{const t=+el.dataset.target,s=t/120;let c=0;const ti=setInterval(()=>{c=Math.min(c+s,t);el.textContent=Math.floor(c);if(c>=t)clearInterval(ti);},16);});}},{threshold:0.3});
+ho.observe(document.getElementById('hero'));
+</script>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:0.85rem;margin-bottom:0.25rem">
+          <div class="logo-mark">EC</div>
+          <div class="logo-text" style="color:var(--white)">ECO-CORE DEVELOPERS<span>Engineering Excellence · Mogadishu</span></div>
+        </div>
+        <p>Somalia's trusted partner for construction, real estate, and infrastructure. Built on quality. Driven by purpose. Est. 2009.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><div class="footer-col-title">Navigation</div><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="projects.html">Projects</a></li><li><a href="team.html">Team</a></li><li><a href="sustainability.html">Sustainability</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><div class="footer-col-title">Services</div><ul><li><a href="services.html">Residential</a></li><li><a href="services.html">Commercial</a></li><li><a href="services.html">Architecture</a></li><li><a href="services.html">Infrastructure</a></li><li><a href="services.html">Project Management</a></li><li><a href="services.html">Consulting</a></li></ul></div>
+      <div class="footer-col"><div class="footer-col-title">Contact</div><ul><li><a href="#">Mogadishu, Somalia</a></li><li><a href="tel:+252612345678">+252 61 234 5678</a></li><li><a href="mailto:info@ecocoredevelopers.so">info@ecocoredevelopers.so</a></li><li><a href="#">WhatsApp Us</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 ECO-CORE DEVELOPERS. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+    </div>
+  </div>
+</footer>
+<button id="backTop"><i class="fas fa-arrow-up"></i></button>
+<script>
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',window.scrollY>60);
+  const bt=document.getElementById('backTop');
+  if(bt)bt.classList.toggle('visible',window.scrollY>400);
+});
+function openMobile(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
+const ro=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('active');ro.unobserve(en.target);}});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+const bt=document.getElementById('backTop');
+if(bt)bt.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+</script>
+
+<script>
+// ===== V3 PREMIUM ANIMATIONS =====
+
+// Scroll progress bar
+const scrollProgress = document.createElement('div');
+scrollProgress.id = 'scrollProgress';
+document.body.appendChild(scrollProgress);
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  scrollProgress.style.width = pct + '%';
+});
+
+// Cursor glow (desktop only)
+if (window.matchMedia('(min-width:1024px)').matches) {
+  const glow = document.createElement('div');
+  glow.className = 'cursor-glow';
+  document.body.appendChild(glow);
+  let gx=0, gy=0, cx=0, cy=0;
+  document.addEventListener('mousemove', e => { gx = e.clientX; gy = e.clientY; glow.style.opacity='1'; });
+  document.addEventListener('mouseleave', () => { glow.style.opacity='0'; });
+  function animateGlow(){
+    cx += (gx-cx)*0.08; cy += (gy-cy)*0.08;
+    glow.style.left = cx+'px'; glow.style.top = cy+'px';
+    requestAnimationFrame(animateGlow);
+  }
+  animateGlow();
+}
+
+// Parallax effect on hero background images
+const parallaxEls = document.querySelectorAll('.hero-bg img, .as-img img, .ai-img img, .sust-img img');
+function updateParallax(){
+  const sy = window.scrollY;
+  parallaxEls.forEach(el => {
+    const rect = el.closest('section, div').getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const speed = 0.15;
+      const offset = (sy - (el.closest('section,div').offsetTop || 0)) * speed;
+      el.style.transform = `translateY(${Math.max(-40,Math.min(40,offset*0.1))}px) scale(1.05)`;
+    }
+  });
+}
+window.addEventListener('scroll', () => { requestAnimationFrame(updateParallax); });
+
+// Image reveal wipe effect on scroll
+const imgRevealEls = document.querySelectorAll('.proj-img, .team-img, .as-img, .ai-img, .sust-img, .ps-img');
+imgRevealEls.forEach(el => el.classList.add('img-reveal'));
+const imgRevealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+      imgRevealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+imgRevealEls.forEach(el => imgRevealObserver.observe(el));
+
+// Stat counter glow pulse after counting completes (for stat bands across pages)
+document.querySelectorAll('.sb-num, .gb-num, .hs-num').forEach(el => {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        el.classList.add('stat-glow');
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  obs.observe(el);
+});
+
+// Magnetic button hover effect (subtle, desktop only)
+if (window.matchMedia('(min-width:1024px)').matches) {
+  document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width/2;
+      const y = e.clientY - rect.top - rect.height/2;
+      btn.style.transform = `translate(${x*0.12}px, ${y*0.25}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = 'translate(0,0)'; });
+  });
+}
+
+// Smooth nav link underline already handled in CSS via .nav-links a::after
+
+// Page load fade-in
+document.documentElement.style.opacity = '0';
+window.addEventListener('DOMContentLoaded', () => {
+  document.documentElement.style.transition = 'opacity 0.5s ease';
+  document.documentElement.style.opacity = '1';
+});
+</script>
+</body>
+</html>
